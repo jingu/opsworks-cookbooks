@@ -25,4 +25,13 @@ node[:deploy].each do |application, deploy|
     cp current/htdocs/.htaccess.live current/htdocs/.htaccess
     EOH
   end
+  script "rm_dotsvn" do
+    Chef::Log.info("remove .svn directories ")
+    interpreter "bash"
+    cwd deploy[:deploy_to]
+    user "root"
+    code <<-EOH
+    find current/ -name ".svn" -exec rm -rf {} ";"
+    EOH
+  end
 end
