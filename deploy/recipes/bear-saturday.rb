@@ -14,7 +14,7 @@ node[:deploy].each do |application, deploy|
     user "root"
     code <<-EOH
     chmod -R 775 current/logs current/tmp
-    chown -R deploy:apache current/logs current/tmp
+    chown -R deploy:www-data current/logs current/tmp
     EOH
   end
   script "rename htaccess" do
